@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characterFragment">
+
+    <!--    Character-->
+    <fragment
+        android:id="@+id/characterFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.characters.CharacterFragment"
+        android:label="fragment_character"
+        tools:layout="@layout/fragment_character">
+
+        <action
+            android:id="@+id/action_characterFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.characters.detail.CharacterDetailFragment"
+        android:label="fragment_character_detail"
+        tools:layout="@layout/fragment_character_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </fragment>
+
+    <!--    Episode-->
+    <fragment
+        android:id="@+id/episodeFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.episode.EpisodeFragment"
+        android:label="fragment_episode"
+        tools:layout="@layout/fragment_episode" />
+
+    <!--    Location-->
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.location.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+
+    <!--    Search-->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+</navigation>

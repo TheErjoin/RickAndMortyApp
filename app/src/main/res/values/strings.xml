@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BestRickAndMorty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--bottom tabs-->
+    <string name="character">Character</string>
+    <string name="location">Location</string>
+    <string name="episode">Episode</string>
+    <string name="search">Search</string>
+    <string name="name_of_episode">Name of episode:</string>
+    <string name="name_of_location">Name of episode:</string>
+    <string name="planet_type">Planet type:</string>
+    <string name="data_created">Data created:</string>
+    <string name="name">Name</string>
+    <string name="gender">Gender:</string>
+    <string name="status">Status</string>
+    <string name="species">Species</string>
+</resources>

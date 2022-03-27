@@ -16,4 +16,14 @@
     <string name="gender">Gender:</string>
     <string name="status">Status</string>
     <string name="species">Species</string>
+    <string name="search_hint">Search character:</string>
+    <string name="choose_status">Choose status:</string>
+    <string name="unknown">Unknown</string>
+    <string name="choose_gen">Choose gen:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="dead">Dead</string>
+    <string name="alive">Alive</string>
 </resources>

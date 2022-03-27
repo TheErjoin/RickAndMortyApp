@@ -15,6 +15,20 @@
         <action
             android:id="@+id/action_characterFragment_to_characterDetailFragment"
             app:destination="@id/characterDetailFragment" />
+        <action
+            android:id="@+id/action_characterFragment_to_characterDialog"
+            app:destination="@id/characterDialog" />
+
+        <argument
+            android:name="gender"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true" />
+
     </fragment>
     <fragment
         android:id="@+id/characterDetailFragment"
@@ -24,10 +38,19 @@
 
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="integer"
+            app:nullable="false" />
 
     </fragment>
-
+    <dialog
+        android:id="@+id/characterDialog"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.characters.dialog.CharacterDialog"
+        android:label="CharacterDialog"
+        tools:layout="@layout/character_dialog">
+        <action
+            android:id="@+id/action_characterDialog_to_characterFragment"
+            app:destination="@id/characterFragment" />
+    </dialog>
     <!--    Episode-->
     <fragment
         android:id="@+id/episodeFragment"
@@ -48,4 +71,5 @@
         android:name="com.example.bestrickandmorty.presentation.ui.fragments.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+
 </navigation>

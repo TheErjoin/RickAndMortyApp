@@ -7,10 +7,9 @@ class GetCharacterListUseCase
 @Inject constructor(private val characterRepository: CharacterRepository) {
 
     operator fun invoke(
-        name: String?,
+        name: String? = null,
         status: String? = null,
-        type: String? = null,
         gender: String? = null
-    ) = characterRepository.getCharacterList(name, status, type, gender)
+    ) = characterRepository.getCharacterList(name, status, gender)
 
 }

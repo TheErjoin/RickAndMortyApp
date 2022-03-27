@@ -13,7 +13,6 @@ interface CharacterApi {
         @Query("page") page: Int,
         @Query("name") name: String?,
         @Query("status") status: String?,
-        @Query("type") type: String?,
         @Query("gender") gender: String?
     ): RickAndMortyResponse<CharacterModelDto>
 

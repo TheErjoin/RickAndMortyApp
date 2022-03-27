@@ -2,6 +2,7 @@ package com.example.bestrickandmorty.presentation.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -20,5 +21,9 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         navController = Navigation.findNavController(this, R.id.nav_host)
         NavigationUI.setupWithNavController(bottomNav, navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            bottomNav.isVisible = destination.id != R.id.characterDetailFragment
+        }
     }
 }

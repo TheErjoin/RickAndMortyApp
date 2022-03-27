@@ -9,9 +9,8 @@ import com.example.bestrickandmorty.domain.common.base.BasePagingSource
 class CharacterPagingSource(
     private val api: CharacterApi, private val name: String?,
     private val status: String?,
-    private val type: String?,
     private val gender: String?,
 ) :
     BasePagingSource<CharacterModelDto, CharacterEntity>
-        ({ api.getCharacterResponse(it, name, status, type, gender) },
+        ({ api.getCharacterResponse(it, name, status, gender) },
         { mapData -> mapData.map { it.toCharacter() } })

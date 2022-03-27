@@ -14,10 +14,9 @@ class CharacterRepositoryImpl @Inject constructor(private val characterApi: Char
     override fun getCharacterList(
         name: String?,
         status: String?,
-        type: String?,
         gender: String?
     ) = doPaging(
-        CharacterPagingSource(characterApi, name, status, type, gender)
+        CharacterPagingSource(characterApi, name, status, gender)
     )
 
     override fun getDetailCharacter(id: Int) = doExecution {

@@ -9,7 +9,6 @@ interface CharacterRepository {
     fun getCharacterList(
         name: String?,
         status: String?,
-        type: String?,
         gender: String?
     ): Flow<PagingData<CharacterEntity>>
 

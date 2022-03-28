@@ -1,18 +1,20 @@
 package com.example.bestrickandmorty.presentation.ui.fragments.characters
 
-import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bestrickandmorty.R
 import com.example.bestrickandmorty.databinding.FragmentCharacterBinding
 import com.example.bestrickandmorty.domain.common.base.BaseFragment
+import com.example.bestrickandmorty.domain.common.extension.searchText
 import com.example.bestrickandmorty.domain.common.extension.showToast
 import com.example.bestrickandmorty.domain.common.extension.stateLoad
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 @AndroidEntryPoint
 class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
@@ -21,6 +23,15 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
         CharacterAdapter()
     }
     private val viewModel: CharacterViewModel by viewModels()
+    private val args: CharacterFragmentArgs by navArgs()
+
+    override fun setupData() {
+        if (args.status == "" || args.gender == "") {
+            viewModel.fetchCharacter()
+        } else {
+            viewModel.fetchCharacter("", args.status, args.gender)
+        }
+    }
 
     override fun setupObservers() {
         observeState()
@@ -49,21 +60,21 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
     }
 
     private fun searchCharacter() {
-        binding.etCharacters.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                if (viewModel.characterList.value != null) {
-                    viewModel.fetchCharacter(p0)
+        try {
+            if (args.status == "" || args.gender == "") {
+                binding.etCharacters.searchText {
+                    viewModel.fetchCharacter(it)
                 }
-                return false
+            } else {
+                binding.etCharacters.searchText {
+                    viewModel.fetchCharacter(it, args.status, args.gender)
+                }
             }
-        })
+        }catch (exception: NullPointerException){
+            requireContext().showToast("Error")
+        }
+
     }
-
-
     override fun setupUI() {
         binding.rvCharacter.apply {
             layoutManager = LinearLayoutManager(context)
@@ -74,9 +85,16 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
 
     private fun observeCharacter() {
         lifecycleScope.launch {
-            viewModel.characterList.collectLatest {
-                it?.let { it1 -> adapter.submitData(it1) }
+            if (args.status == "" || args.gender == "") {
+                viewModel.characterList.collectLatest {
+                    it?.let { it1 -> adapter.submitData(it1) }
+                }
+            } else {
+                viewModel.characterList.collectLatest {
+                    it?.let { it1 -> adapter.submitData(it1) }
+                }
             }
+
         }
     }
 

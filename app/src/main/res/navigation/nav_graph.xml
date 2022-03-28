@@ -19,13 +19,15 @@
             android:id="@+id/action_characterFragment_to_characterDialog"
             app:destination="@id/characterDialog" />
 
-        <argument
-            android:name="gender"
-            app:argType="string"
-            app:nullable="true" />
 
         <argument
             android:name="status"
+            app:argType="string"
+            android:defaultValue=""
+            app:nullable="true" />
+        <argument
+            android:name="gender"
+            android:defaultValue=""
             app:argType="string"
             app:nullable="true" />
 

@@ -24,7 +24,6 @@ class CharacterViewModel @Inject constructor(private val getCharacterListUseCase
         MutableStateFlow<CharacterFragmentState>(CharacterFragmentState.Init)
     val state: StateFlow<CharacterFragmentState> get() = _state
 
-
     init {
         fetchCharacter()
     }
@@ -45,7 +44,6 @@ class CharacterViewModel @Inject constructor(private val getCharacterListUseCase
                 }
         }
     }
-
     private fun showToast(message: String?) {
         _state.value = CharacterFragmentState.ShowToast(message)
     }

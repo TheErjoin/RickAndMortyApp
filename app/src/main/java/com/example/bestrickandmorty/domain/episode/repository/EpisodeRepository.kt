@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface EpisodeRepository {
 
-    fun getEpisodeList(): Flow<PagingData<EpisodeEntity>>
+    fun getEpisodeList(name: String?,episode: String?): Flow<PagingData<EpisodeEntity>>
 
 }

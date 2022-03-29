@@ -14,22 +14,16 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <SearchView
             android:id="@+id/et_characters"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topLine"
             android:inputType="text"
-            android:queryHint="Search Character:"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Location:"
             android:textColor="@color/black"
             tools:ignore="Autofill,HardcodedText,LabelFor,TextFields" />
-
-        <ImageView
-            android:id="@+id/iv_filter"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_filter"
-            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocationRepository {
 
-    fun getLocationList(): Flow<PagingData<LocationEntity>>
+    fun getLocationList(name: String?): Flow<PagingData<LocationEntity>>
 
 }

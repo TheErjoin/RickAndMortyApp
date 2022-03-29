@@ -23,7 +23,6 @@
             android:queryHint="Search Character:"
             android:textColor="@color/black"
             android:iconifiedByDefault="false"
-            android:imeOptions="actionSearch"
             tools:ignore="Autofill,HardcodedText,LabelFor,TextFields" />
 
         <ImageView

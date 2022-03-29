@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bestrickandmorty.data.common.response.RickAndMortyResponse
+import retrofit2.HttpException
 import java.io.IOException
 
 
@@ -31,6 +32,8 @@ abstract class BasePagingSource<ValueDto : Any, Value : Any>(
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
+        } catch (e: HttpException) {
+            return LoadResult.Error(e)
         }
     }
 

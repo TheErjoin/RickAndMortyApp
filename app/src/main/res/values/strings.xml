@@ -11,7 +11,6 @@
     <string name="name_of_episode">Name of episode:</string>
     <string name="name_of_location">Name of episode:</string>
     <string name="planet_type">Planet type:</string>
-    <string name="data_created">Data created:</string>
     <string name="name">Name</string>
     <string name="gender">Gender:</string>
     <string name="status">Status</string>
@@ -26,4 +25,14 @@
     <string name="yes">Yes</string>
     <string name="dead">Dead</string>
     <string name="alive">Alive</string>
+    <string name="data_created">Data created:</string>
+    <string name="dimension">Dimension:</string>
+    <string name="planets_type">Planets type:</string>
+    <string name="choose_season">Choose season:</string>
+    <string name="s01">S01</string>
+    <string name="s02">s02</string>
+    <string name="s03">s03</string>
+    <string name="s04">s04</string>
+    <string name="s05">s05</string>
+    <string name="apply">apply</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.bestrickandmorty.data.episode
 
 import com.example.bestrickandmorty.data.common.module.NetworkModule
 import com.example.bestrickandmorty.data.episode.remote.EpisodeApi
+import com.example.bestrickandmorty.domain.episode.repository.EpisodeDetailRepository
 import com.example.bestrickandmorty.domain.episode.repository.EpisodeRepository
 import dagger.Module
 import dagger.Provides
@@ -23,6 +24,12 @@ class EpisodeModule {
     @Singleton
     @Provides
     fun provideEpisodeRepository(api: EpisodeApi): EpisodeRepository {
+        return EpisodeRepositoryImpl(api)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEpisodeDetailRepository(api: EpisodeApi): EpisodeDetailRepository {
         return EpisodeRepositoryImpl(api)
     }
 }

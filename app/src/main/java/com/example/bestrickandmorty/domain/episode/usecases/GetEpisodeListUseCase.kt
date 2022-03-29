@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GetEpisodeListUseCase @Inject constructor(private val repository: EpisodeRepository) {
 
-    operator fun invoke() = repository.getEpisodeList()
+    operator fun invoke(name: String?,episode: String?) = repository.getEpisodeList(name,episode)
 
 }

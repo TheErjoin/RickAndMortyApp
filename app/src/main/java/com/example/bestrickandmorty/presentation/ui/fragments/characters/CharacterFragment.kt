@@ -14,7 +14,6 @@ import com.example.bestrickandmorty.domain.common.extension.stateLoad
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.lang.NullPointerException
 
 @AndroidEntryPoint
 class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
@@ -26,9 +25,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
     private val args: CharacterFragmentArgs by navArgs()
 
     override fun setupData() {
-        if (args.status == "" || args.gender == "") {
-            viewModel.fetchCharacter()
-        } else {
+        if (args.status != null || args.gender != null) {
             viewModel.fetchCharacter("", args.status, args.gender)
         }
     }
@@ -60,7 +57,6 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
     }
 
     private fun searchCharacter() {
-        try {
             if (args.status == "" || args.gender == "") {
                 binding.etCharacters.searchText {
                     viewModel.fetchCharacter(it)
@@ -70,10 +66,6 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>() {
                     viewModel.fetchCharacter(it, args.status, args.gender)
                 }
             }
-        }catch (exception: NullPointerException){
-            requireContext().showToast("Error")
-        }
-
     }
     override fun setupUI() {
         binding.rvCharacter.apply {

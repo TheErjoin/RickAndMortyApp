@@ -1,10 +1,13 @@
 package com.example.bestrickandmorty.domain.common.extension
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.SearchView
+import android.widget.Toast
 
+//EditText Extension
 fun EditText.searchText(data: (name: String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -20,6 +23,7 @@ fun EditText.searchText(data: (name: String) -> Unit) {
     })
 }
 
+//SearchView Extension
 fun SearchView.searchText(data: (name: String?) -> Unit) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -32,4 +36,9 @@ fun SearchView.searchText(data: (name: String?) -> Unit) {
         }
 
     })
+}
+
+//Toast Extension
+fun Context.showToast(string: String) {
+    Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
 }

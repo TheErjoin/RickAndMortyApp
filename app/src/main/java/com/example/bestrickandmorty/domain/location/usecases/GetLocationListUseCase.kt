@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GetLocationListUseCase @Inject constructor(private val repository: LocationRepository) {
 
-    operator fun invoke() = repository.getLocationList()
+    operator fun invoke(name: String?) = repository.getLocationList(name)
 
 }

@@ -1,18 +1,15 @@
 package com.example.bestrickandmorty.presentation.ui.fragments.location
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bestrickandmorty.databinding.FragmentLocationBinding
 import com.example.bestrickandmorty.domain.common.base.BaseFragment
+import com.example.bestrickandmorty.domain.common.extension.searchText
 import com.example.bestrickandmorty.domain.common.extension.stateLoad
-import com.example.bestrickandmorty.domain.location.model.LocationEntity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class LocationFragment : BaseFragment<FragmentLocationBinding>() {
@@ -27,12 +24,11 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>() {
     }
 
     private fun observeLocation() {
-        viewModel.fetchLocation().flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-            .onEach { handleLocation(it) }.launchIn(lifecycleScope)
-    }
-
-    private suspend fun handleLocation(it: PagingData<LocationEntity>) {
-        adapter.submitData(it)
+        lifecycleScope.launchWhenCreated {
+            viewModel.locationList.collectLatest {
+                it?.let { it1 -> adapter.submitData(it1) }
+            }
+        }
     }
 
     override fun setupUI() {
@@ -41,6 +37,19 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>() {
             layoutManager = LinearLayoutManager(context)
         }
         adapter.stateLoad(binding.rvLocation, binding.progress)
+    }
+
+    override fun setupListeners() {
+        binding.etCharacters.searchText {
+            viewModel.fetchLocation(it)
+        }
+        adapter.onClickItem = {
+            findNavController().navigate(
+                LocationFragmentDirections.actionLocationFragmentToLocationDetailFragment(
+                    it.id
+                )
+            )
+        }
     }
 
     override fun bind(): FragmentLocationBinding {

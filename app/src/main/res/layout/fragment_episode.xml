@@ -14,13 +14,14 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <SearchView
             android:id="@+id/et_episode"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topLine"
             android:inputType="text"
-            android:queryHint="Search Character:"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Episode:"
             android:textColor="@color/black"
             tools:ignore="Autofill,HardcodedText,LabelFor,TextFields" />
 

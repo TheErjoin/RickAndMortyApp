@@ -6,8 +6,8 @@ import com.example.bestrickandmorty.data.location.remote.LocationApi
 import com.example.bestrickandmorty.domain.common.base.BasePagingSource
 import com.example.bestrickandmorty.domain.location.model.LocationEntity
 
-class LocationPagingSource(private val api: LocationApi) :
+class LocationPagingSource(private val api: LocationApi, val name: String?) :
     BasePagingSource<LocationModelDto, LocationEntity>
-        ({ api.getLocation(it) },
+        ({ api.getLocation(it, name) },
         { data -> data.map { it.toLocation() } }) {
 }

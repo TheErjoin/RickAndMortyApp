@@ -58,20 +58,84 @@
         android:id="@+id/episodeFragment"
         android:name="com.example.bestrickandmorty.presentation.ui.fragments.episode.EpisodeFragment"
         android:label="fragment_episode"
-        tools:layout="@layout/fragment_episode" />
+        tools:layout="@layout/fragment_episode">
+        <action
+            android:id="@+id/action_episodeFragment_to_episodeDetailFragment"
+            app:destination="@id/episodeDetailFragment" />
+        <action
+            android:id="@+id/action_episodeFragment_to_episodeDialog"
+            app:destination="@id/episodeDialog" />
+
+        <argument
+            android:name="season"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/episodeDetailFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.episode.detail.EpisodeDetailFragment"
+        android:label="fragment_episode_detail"
+        tools:layout="@layout/fragment_episode_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/episodeDialog"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.episode.dialog.EpisodeDialog"
+        android:label="EpisodeDialog">
+        <action
+            android:id="@+id/action_episodeDialog_to_episodeFragment"
+            app:destination="@id/episodeFragment" />
+    </dialog>
 
     <!--    Location-->
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.bestrickandmorty.presentation.ui.fragments.location.LocationFragment"
         android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location">
+        <action
+            android:id="@+id/action_locationFragment_to_locationDetailFragment"
+            app:destination="@id/locationDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationDetailFragment"
+        android:name="com.example.bestrickandmorty.presentation.ui.fragments.location.detail.LocationDetailFragment"
+        android:label="fragment_location_detail"
+        tools:layout="@layout/fragment_location_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
+
+    </fragment>
 
     <!--    Search-->
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.bestrickandmorty.presentation.ui.fragments.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_locationDetailFragment"
+            app:destination="@id/locationDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_episodeDetailFragment"
+            app:destination="@id/episodeDetailFragment" />
+    </fragment>
+
 
 </navigation>

@@ -1,6 +1,7 @@
 package com.example.bestrickandmorty.presentation.ui.fragments.search
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bestrickandmorty.databinding.FragmentSearchBinding
 import com.example.bestrickandmorty.domain.common.base.BaseFragment
 import com.example.bestrickandmorty.domain.common.extension.searchText
-import com.example.bestrickandmorty.domain.common.extension.showToast
 import com.example.bestrickandmorty.domain.search.entity.FilterEntity
 import com.example.bestrickandmorty.domain.search.entity.toCharacterEntity
 import com.example.bestrickandmorty.domain.search.entity.toEpisodeEntity
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-@SuppressLint("NotifyDataSetChanged")
+
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val viewModel: SearchVIewModel by viewModels()
@@ -49,7 +49,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         observeEpisode()
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeEpisode() {
         lifecycleScope.launchWhenCreated {
             viewModel.fetchCharacterSearch.collectLatest {
@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Loading -> {
                     }
                     is UiState.Error -> {
-                        requireContext().showToast("Error")
+                        Log.e("TAG", "observeEpisode: $it")
                     }
                     is UiState.Success -> {
                         it.data.map {
@@ -75,7 +75,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
     }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeLocation() {
         lifecycleScope.launchWhenCreated {
             viewModel.fetchLocationSearch.collectLatest {
@@ -84,7 +84,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Loading -> {
                     }
                     is UiState.Error -> {
-                        requireContext().showToast("Error")
+                        Log.e("TAG", "observe: $it")
                     }
                     is UiState.Success -> {
                         it.data.map {
@@ -102,7 +102,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
 
     }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeCharacter() {
         lifecycleScope.launchWhenCreated {
             viewModel.fetchEpisodeSearch.collectLatest {
@@ -112,7 +112,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Loading -> {
                     }
                     is UiState.Error -> {
-                        requireContext().showToast("Error")
+                        Log.e("TAG", "observe: $it")
                     }
                     is UiState.Success -> it.data.map {
                         it.toEpisodeEntity()
@@ -143,11 +143,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun onItemEpisode(id: Int) {
-
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToLocationDetailFragment(
+                id
+            )
+        )
     }
 
     private fun onItemLocation(id: Int) {
-
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToEpisodeDetailFragment(
+                id
+            )
+        )
     }
 
     private fun onItemCharacter(id: Int) {

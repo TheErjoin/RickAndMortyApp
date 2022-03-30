@@ -6,9 +6,12 @@ import com.example.bestrickandmorty.domain.location.model.LocationEntity
 
 sealed class FilterEntity {
 
-    class CharactersEntity(val characterEntity: CharacterEntity) : FilterEntity()
-    class EpisodesEntity(val episodeEntity: EpisodeEntity) : FilterEntity()
-    class LocationsEntity(val locationEntity: LocationEntity) : FilterEntity()
+    data class CharactersEntity(val characterEntity: CharacterEntity) :
+        FilterEntity()
+    data class EpisodesEntity(val episodeEntity: EpisodeEntity) :
+        FilterEntity()
+    data class LocationsEntity(val locationEntity: LocationEntity) :
+        FilterEntity()
 }
 
 fun CharacterEntity.toCharacterEntity() = FilterEntity.CharactersEntity(

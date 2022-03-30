@@ -24,14 +24,16 @@ fun EditText.searchText(data: (name: String) -> Unit) {
 }
 
 //SearchView Extension
-fun SearchView.searchText(data: (name: String?) -> Unit) {
+fun SearchView.searchText(data: (name: String) -> Unit) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(p0: String?): Boolean {
             return false
         }
 
         override fun onQueryTextChange(p0: String?): Boolean {
-            data(p0)
+            if (p0 != null) {
+                data(p0)
+            }
             return false
         }
 

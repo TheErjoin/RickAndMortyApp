@@ -60,16 +60,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Error -> {
                         Log.e("TAG", "observeEpisode: $it")
                     }
-                    is UiState.Success -> {
-                        it.data.map {
-                            it.toCharacterEntity()
-                        }.let {
-                            val sort = it.sortedByDescending { it1 ->
-                                it1.characterEntity.created
-                            }
-                            list.addAll(sort)
+                    is UiState.Success -> it.data.map { character ->
+                        character.toCharacterEntity()
+                    }.let { sorted ->
+                        val sort = sorted.sortedByDescending { it1 ->
+                            it1.characterEntity.created
                         }
+                        list.addAll(sort)
                     }
+
                 }
                 adapter.notifyDataSetChanged()
             }
@@ -86,15 +85,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Error -> {
                         Log.e("TAG", "observe: $it")
                     }
-                    is UiState.Success -> {
-                        it.data.map {
-                            it.toLocationEntity()
-                        }.let {
-                            val sort = it.sortedByDescending { it1 ->
-                                it1.locationEntity.created
-                            }
-                            list.addAll(sort)
+                    is UiState.Success -> it.data.map { location ->
+                        location.toLocationEntity()
+                    }.let { sorted ->
+                        val sort = sorted.sortedByDescending { it1 ->
+                            it1.locationEntity.created
                         }
+                        list.addAll(sort)
                     }
                 }
                 adapter.notifyDataSetChanged()
@@ -114,10 +111,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is UiState.Error -> {
                         Log.e("TAG", "observe: $it")
                     }
-                    is UiState.Success -> it.data.map {
-                        it.toEpisodeEntity()
-                    }.let {
-                        val sort = it.sortedByDescending { it1 ->
+                    is UiState.Success -> it.data.map { episode ->
+                        episode.toEpisodeEntity()
+                    }.let { sorted ->
+                        val sort = sorted.sortedByDescending { it1 ->
                             it1.episodeEntity.created
                         }
                         list.addAll(sort)
@@ -130,7 +127,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun setupListeners() {
         binding.etSearch.searchText {
-            it?.let { it1 -> searchItem(it1) }
+            searchItem(it)
             list.clear()
         }
     }
